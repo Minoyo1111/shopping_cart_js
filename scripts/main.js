@@ -4,12 +4,27 @@ document.addEventListener('DOMContentLoaded', () => {
   trashBtns.forEach(btn =>{
     btn.addEventListener('click', setRemoveItemBtn)
   })
-   const inputs = document.querySelectorAll('.cart .quantity')
-   inputs.forEach(input =>{
-     input.addEventListener('change', setInput)
-   })
+  const inputs = document.querySelectorAll('.cart .quantity')
+  inputs.forEach(input =>{
+    input.addEventListener('change', setInput)
+  })
+
+  const add_buttons = document.querySelectorAll('.add_item')
+  add_buttons.forEach(btn =>{
+    btn.addEventListener('click', setItemBtn)
+  })
+
 
 })
+  function setItemBtn(e){
+    const product = e.currentTarget.parentElement.parentElement
+    const productName = product.querySelector('.cat-name').innerText
+    const price = product.querySelector('.price').innerText.replace('$', '')
+    console.log(productName, price)
+
+  }
+
+
   function setInput(e){
     const input = e.target
     let quantity = input.value
@@ -20,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartItem = input.parentElement.parentElement
     const price = cartItem.querySelector('.price').innerText.replace('$', '')
     cartItem.querySelector('.subtotal').innerText = `$${quantity * price}`
-
 
     updateCart()
   }
